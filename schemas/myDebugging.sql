@@ -92,5 +92,7 @@ VALUES(3, 'BR223', 'APBT LEGACY KENNEL');
 INSERT INTO breeder(id_breeder, num_breeder, breeder_name) 
 VALUES(4, 'BR431', 'FAUVE KENNEL');
 
+-- Deliting password FROM Owner table 
+ALTER TABLE owner DROP COLUMN password;
 
 SELECT * FROM breeder;
