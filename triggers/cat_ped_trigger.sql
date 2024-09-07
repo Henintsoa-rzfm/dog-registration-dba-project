@@ -1,3 +1,5 @@
+```markdown
+```plsql
 CREATE OR REPLACE TRIGGER trig_before_insert_cat_ped
 BEFORE INSERT ON category_pedigree
 FOR EACH ROW
