@@ -1,0 +1,15 @@
+notice => This is not the finality of the project, so the directory structure may change anytime 
+
+--myDebugging.sql
+The myDebbuging.sql is just a file which contain code that I use to see 
+the number of the line in case of errors when i used SQL Developper
+
+--SCHEMAS
+The schemas folder contain all the code about table creation and data insertion and 
+table modification
+
+--SEQUENCES
+The sequences folder contain all the sequences
+
+--TRIGGERS
+The triggers folder contain all the TRIGGERS created
