@@ -13,3 +13,4 @@ VALUES(4, 'BR431', 'FAUVE KENNEL');
 
 -- Inserting data to owner regards the sequence and TRIGGER and the table modification
 INSERT INTO owner(last_name, first_name, email) VALUES('PERALTA', 'Jake', 'jake.p@gmail.com');
+INSERT INTO owner(last_name, first_name, email) VALUES('NANO', 'Mike', 'n.mikep@gmail.com');
