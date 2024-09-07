@@ -1,0 +1,6 @@
+--For auto increment
+CREATE SEQUENCE cat_ped_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
