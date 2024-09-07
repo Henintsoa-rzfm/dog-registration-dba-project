@@ -95,4 +95,29 @@ VALUES(4, 'BR431', 'FAUVE KENNEL');
 -- Deliting password FROM Owner table 
 ALTER TABLE owner DROP COLUMN password;
 
-SELECT * FROM breeder;
+SELECT * FROM owner;
+
+CREATE SEQUENCE owner_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+-- create_triggers.sql
+
+CREATE OR REPLACE TRIGGER trg_before_insert_owner
+BEFORE INSERT ON owner
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_owner IS NULL THEN
+        SELECT owner_seq.NEXTVAL
+        INTO :NEW.id_owner
+        FROM dual;
+    END IF;
+END;
+/
+
+-- Inserting data to owner regards the sequence and TRIGGER and the table modification
+INSERT INTO owner(last_name, first_name, email) VALUES('PERALTA', 'Jake', 'jake.p@gmail.com');
+
+SELECT * FROM owner;

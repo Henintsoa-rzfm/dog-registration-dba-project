@@ -1,2 +1,2 @@
-The myDebbuging.sql is just a file that I use to see the number of the line in case of
-error when i used SQL Developper
+The myDebbuging.sql is just a file which contain code that I use to see 
+the number of the line in case of errors when i used SQL Developper
