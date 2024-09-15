@@ -31,3 +31,7 @@ INSERT INTO pedigree(pedigree_num, id_cat_ped) VALUES('BAL_01TH_900', 1);
 
 INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
 VALUES ('BAL_01TH900', 'BOLT SUNNY DAY', TO_DATE('2022-09-14', 'YYYY-MM-DD'), 'image', 1, 1 , 1, 1) ;
+INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
+VALUES ('BAL_01HS600', 'VAN PHUN SLK', TO_DATE('2019-09-14', 'YYYY-MM-DD'), 'image2', 1, 1 , 2, 1) ;
+INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
+VALUES ('B2L_33HS600', 'JUNIOR HAT', TO_DATE('2023-10-24', 'YYYY-MM-DD'), 'image3', 1, 1 , 2, 2) ;
