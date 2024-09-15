@@ -186,3 +186,113 @@ IF :NEW.id_category IS NULL THEN
 END IF;
 END;
 /
+
+INSERT INTO category(category_name) VALUES ('Terrier');
+INSERT INTO category(category_name) VALUES ('Molosse');
+SELECT * FROM category;
+
+ALTER TABLE dog DROP COLUMN id_breed;
+ALTER TABLE dog ADD id_breed INTEGER;
+ALTER TABLE dog ADD CONSTRAINT fk_breed_dog FOREIGN KEY (id_breed) REFERENCES breed(id_breed);
+
+ALTER TABLE breed DROP PRIMARY KEY;  
+ALTER TABLE breed MODIFY id_breed INTEGER;  
+ALTER TABLE breed ADD CONSTRAINT breed_pk PRIMARY KEY (id_breed);
+
+CREATE SEQUENCE breed_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+CREATE OR REPLACE TRIGGER insert_breed_trigger
+BEFORE INSERT ON Breed
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_breed IS NULL THEN
+        SELECT breed_seq.NEXTVAL
+            INTO :NEW.id_breed
+        FROM dual;
+    END IF;
+END;
+/
+
+
+INSERT INTO breed(breed_name, id_category) VALUES('American staffordshire', 1);
+INSERT INTO breed(breed_name, id_category) VALUES('Rotweiller', 2);
+
+INSERT INTO pedigree(pedigree_num, id_cat_ped) VALUES('BAL_01TH_900', 1);
+SELECT * FROM pedigree;
+
+CREATE SEQUENCE ped_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+
+CREATE OR REPLACE TRIGGER trig_before_insert_dog
+BEFORE INSERT ON dog
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_dog IS NULL THEN
+        SELECT dog_seq.NEXTVAL
+            INTO :NEW.id_dog
+        FROM dual;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trig_before_insert_ped
+BEFORE INSERT ON pedigree
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_ped IS NULL THEN
+        SELECT ped_seq.NEXTVAL
+            INTO :NEW.id_ped
+        FROM dual;
+    END IF;
+END;
+/
+
+INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
+VALUES ('BAL_01TH900', 'BOLT SUNNY DAY', TO_DATE('2022-09-14', 'YYYY-MM-DD'), 'image', 1, 1 , 1, 1) ;
+    
+SELECT dog.dog_name, owner.first_name ||' ' || owner.last_name AS Owner FROM dog, owner WHERE dog.id_owner = owner.id_owner;
+SELECT dog.dog_name, EXTRACT(YEAR FROM dog_birth) AS Naissance FROM DOG WHERE id_dog =1;
+
+ALTER TABLE DOG ADD status VARCHAR2(50);
+
+
+CREATE OR REPLACE TRIGGER dog_status
+BEFORE INSERT ON Dog
+FOR EACH ROW
+DECLARE
+    var_birth_year INTEGER;
+    var_actual_year INTEGER;
+BEGIN
+    -- Get the current year
+    SELECT EXTRACT(YEAR FROM SYSDATE) 
+    INTO var_actual_year 
+    FROM DUAL;
+    
+    -- Get the dog's birth year from the :NEW value
+    var_birth_year := EXTRACT(YEAR FROM :NEW.dog_birth);
+    
+    -- Set the dog status based on the age
+    IF var_actual_year - var_birth_year >= 5 THEN
+        :NEW.status := 'Retraité';
+    ELSE
+        :NEW.status := 'Actif';
+    END IF;
+END;
+/
+
+INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
+VALUES ('BAL_01HS600', 'VAN PHUN SLK', TO_DATE('2019-09-14', 'YYYY-MM-DD'), 'image2', 1, 1 , 2, 1) ;
+
+INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
+VALUES ('B2L_33HS600', 'JUNIOR HAT', TO_DATE('2023-10-24', 'YYYY-MM-DD'), 'image3', 1, 1 , 2, 2) ;
+
+
+SELECT * FROM Dog;
