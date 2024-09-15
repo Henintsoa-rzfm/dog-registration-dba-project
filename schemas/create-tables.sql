@@ -28,7 +28,7 @@ CREATE TABLE category_pedigree (
 
 -- Create breed table
 CREATE TABLE breed (
-    id_breed VARCHAR2(50) PRIMARY KEY,
+    id_breed VARCHAR2(50) PRIMARY KEY, --Modify to INTEGER
     breed_name VARCHAR2(50) NOT NULL,
     id_category INTEGER,
     CONSTRAINT fk_breed_category FOREIGN KEY (id_category)

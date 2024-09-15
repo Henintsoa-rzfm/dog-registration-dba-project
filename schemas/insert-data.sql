@@ -18,3 +18,16 @@ INSERT INTO owner(last_name, first_name, email) VALUES('NANO', 'Mike', 'n.mikep@
 -- Insert into category_pedigree
 INSERT INTO category_pedigree(name_categ_pedigree) VALUES('LOM');
 INSERT INTO category_pedigree(name_categ_pedigree) VALUES('LOF');
+
+INSERT INTO category(category_name) VALUES ("Terrier");
+INSERT INTO category(category_name) VALUES ('Terrier');
+INSERT INTO category(category_name) VALUES ('Molosse');
+SELECT * FROM category;
+
+INSERT INTO breed(breed_name, id_category) VALUES('American staffordshire', 1);
+INSERT INTO breed(breed_name, id_category) VALUES('Rotweiller', 2);
+
+INSERT INTO pedigree(pedigree_num, id_cat_ped) VALUES('BAL_01TH_900', 1);
+
+INSERT INTO dog(numid, dog_name, dog_birth, dog_img, id_ped, id_breeder, id_breed, id_owner)
+VALUES ('BAL_01TH900', 'BOLT SUNNY DAY', TO_DATE('2022-09-14', 'YYYY-MM-DD'), 'image', 1, 1 , 1, 1) ;

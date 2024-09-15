@@ -108,7 +108,7 @@ NOCYCLE;
 CREATE OR REPLACE TRIGGER trg_before_insert_owner
 BEFORE INSERT ON owner
 FOR EACH ROW
-BEGIN
+BEGIN    
     IF :NEW.id_owner IS NULL THEN
         SELECT owner_seq.NEXTVAL
         INTO :NEW.id_owner
@@ -117,7 +117,72 @@ BEGIN
 END;
 /
 
+select * from owner;
 -- Inserting data to owner regards the sequence and TRIGGER and the table modification
 INSERT INTO owner(last_name, first_name, email) VALUES('PERALTA', 'Jake', 'jake.p@gmail.com');
 INSERT INTO owner(last_name, first_name, email) VALUES('NANO', 'Mike', 'n.mikep@gmail.com');
+DROP SEQUENCE owner_seq;
 SELECT * FROM owner;
+
+CREATE SEQUENCE cat_ped_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+CREATE OR REPLACE TRIGGER trig_before_insert_cat_ped
+BEFORE INSERT ON category_pedigree
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_cat_ped IS NULL THEN
+        SELECT cat_ped_seq.NEXTVAL
+            INTO :NEW.id_cat_ped
+        FROM dual;
+    END IF;
+END;
+/
+--For auto increment
+CREATE SEQUENCE dog_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+INSERT INTO category_pedigree(name_categ_pedigree) VALUES('LOF');
+SELECT * FROM dog;
+
+CREATE OR REPLACE TRIGGER trig_before_insert_dog
+BEFORE INSERT ON dog
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_dog IS NULL THEN
+        SELECT dog_seq.NEXTVAL
+            INTO :NEW.id_dog
+        FROM dual;
+    END IF;
+END;
+/
+
+
+CREATE SEQUENCE cat_ped
+START WITH 1 
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+CREATE SEQUENCE cat_seq
+START WITH 1 
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+CREATE TRIGGER insert_category_trigger
+BEFORE INSERT ON CATEGORY
+FOR EACH ROW
+BEGIN
+IF :NEW.id_category IS NULL THEN
+    SELECT cat_seq.NEXTVAL INTO 
+        :NEW.id_category
+    FROM dual;
+END IF;
+END;
+/
